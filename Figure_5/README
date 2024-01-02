@@ -1,0 +1,11 @@
+#### Convert expression into average control average centered standard deviation
+> perl avgmean.centered.FC.SD.foreachcell.pl quant_norm.4foldpadj1e-3.both.table
+
+#### K-means clustering using cluster 3.0
+> cluster -f output.quant_norm.4foldpadj1e-3.both.table.eachcellavgcenteredSD e 7 -k 8 -u quant_norm.4foldpadj1e-3.both.table.eachcellavgcenteredSD_K_G8;
+
+#### Removing excessive column/row to make it as input file for heat map generation ###
+> perl __cdt2table.40threads.pl
+
+#### Heat map generation
+> Rscript _quant_norm.4foldpadj1e-3.both.table.eachcellavgcenteredSD_K_G8.reordered.ggplot2.r
