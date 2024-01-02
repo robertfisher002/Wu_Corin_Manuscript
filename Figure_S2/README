@@ -1,0 +1,4 @@
+### calculate hypergeometric distribution
+> perl 03.Hypergeometric_distribution_table_withRcmd.edited2countGOmatchedgenes.pl c5.go.bp.v2023.1.Hs.symbols.gmt quant_norm.Padj001Lfc2.both.table.eachcellavgcenteredSD_K_G6.reordered.kgg_.gmt
+> perl 03.Hypergeometric_distribution_table_withRcmd.edited2countGOmatchedgenes.pl c5.go.cc.v2023.1.Hs.symbols.gmt quant_norm.Padj001Lfc2.both.table.eachcellavgcenteredSD_K_G6.reordered.kgg_.gmt
+> perl 03.Hypergeometric_distribution_table_withRcmd.edited2countGOmatchedgenes.pl c5.go.mf.v2023.1.Hs.symbols.gmt quant_norm.Padj001Lfc2.both.table.eachcellavgcenteredSD_K_G6.reordered.kgg_.gmt
