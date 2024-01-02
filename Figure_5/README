@@ -1,5 +1,5 @@
 #### Venn diagrams
-> Rscript volcano.rmd
+> Rscript VennDiagrams.Rmd
 
 #### Convert expression into average control average centered standard deviation
 > perl avgmean.centered.FC.SD.foreachcell.pl quant_norm.4foldpadj1e-3.both.table
