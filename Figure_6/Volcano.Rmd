@@ -1,0 +1,96 @@
+---
+title: "Volcano Plots"
+output: html_notebook
+---
+
+#read in plx vx plx + corin RNA-seq files
+```{r}
+rna_451 <- read.csv("/Users/rjfisher/Library/Mobile Documents/com~apple~CloudDocs/BUSM/Alani Lab/DATA/Muzhou_RNAseq_Data_Analysis/RNAseq/plx_plxcorin_451.csv")
+rna_1205 <- read.csv("/Users/rjfisher/Library/Mobile Documents/com~apple~CloudDocs/BUSM/Alani Lab/DATA/Muzhou_RNAseq_Data_Analysis/RNAseq/plx_plxcorin_1205.csv")
+```
+
+```{r}
+rna_451$padj[rna_451$padj == "0"] <- "1.00e-306"
+rna_1205$padj[rna_1205$padj == "0"] <- "1.00e-306"
+
+rna_451$padj <- as.numeric (rna_451$padj)
+rna_1205$padj <- as.numeric (rna_1205$padj)
+
+rna_451$padj <- -log10(rna_451$padj)
+rna_1205$padj <- -log10(rna_1205$padj)
+```
+
+#volcano for 451Lu
+```{r}
+library(ggplot2)
+library(ggrepel)
+
+
+# Add labels for specific genes
+labels <- subset(rna_451, gene %in% c("MITF", "DUSP1", "DUSP5", "AXL"))
+
+plot <- ggplot(rna_451, aes(x = FC, y = padj)) +
+  geom_point(aes(
+    color = ifelse(FC > 1 & padj > 2, "Positive", 
+                   ifelse(FC < -1 & padj > 2, "Negative", "Not Significant"))
+  ), size = 0.25) +
+  geom_hline(yintercept = 1.3, linetype = "dashed", color = "gray") +
+  geom_vline(xintercept = -1, linetype = "dashed", color = "grey") +
+  geom_vline(xintercept = 1, linetype = "dashed", color = "grey") +
+  xlim(-15,15)+
+  scale_color_manual(
+    values = c("Positive" = "red", "Negative" = "blue", "Not Significant" = "grey"),
+    guide = "none"
+  ) +
+  theme_bw() +
+  labs(title = "451Lu-R DEG", y = "-Log10(padj)", x = "Log2FC(PLX+corin/PLX)") +
+  geom_label_repel(data = labels, aes(label = gene,  size = 2, segment.size =1), box.padding = 0.5) +
+  theme(plot.title = element_text(hjust = 0.5), legend.position = "none")
+
+# Print the plot
+print(plot)
+
+
+```
+```{r}
+ggsave("DEG_451_volcano.pdf", plot, width = 4, height = 3)
+```
+
+#volcano for 1205Lu
+```{r}
+library(ggplot2)
+library(ggrepel)
+
+
+# Add labels for specific genes
+labels <- subset(rna_1205, gene %in% c("MITF", "DUSP1", "DUSP5", "AXL"))
+
+plot <- ggplot(rna_1205, aes(x = FC, y = padj)) +
+  geom_point(aes(
+    color = ifelse(FC > 1 & padj > 1.3, "Positive", 
+                   ifelse(FC < -1 & padj > 1.3, "Negative", "Not Significant"))
+  ), size = 0.25) +
+  geom_hline(yintercept = 1.3, linetype = "dashed", color = "gray") +
+  geom_vline(xintercept = -1, linetype = "dashed", color = "grey") +
+  geom_vline(xintercept = 1, linetype = "dashed", color = "grey") +
+  xlim(-12,12)+
+  scale_color_manual(
+    values = c("Positive" = "red", "Negative" = "blue", "Not Significant" = "grey"),
+    guide = "none"
+  ) +
+  theme_bw() +
+  labs(title = "1205Lu-R DEG", y = "-Log10(padj)", x = "Log2FC(PLX+corin/corin)") +
+  geom_label_repel(data = labels, aes(label = gene,  size = 2, segment.size =1), box.padding = 0.5) +
+  theme(plot.title = element_text(hjust = 0.5), legend.position = "none")
+
+# Print the plot
+print(plot)
+```
+
+```{r}
+ggsave("DEG_1205_volcano.pdf", plot, width = 4, height = 3)
+```
+
+
+
+
