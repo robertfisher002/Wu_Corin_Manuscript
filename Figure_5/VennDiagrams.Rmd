@@ -1,0 +1,63 @@
+---
+title: "Venn Diagrams"
+output: html_notebook
+---
+
+#read in plx vx plx + corin RNA-seq files
+```{r}
+rna_451 <- read.csv("/Users/rjfisher/Library/Mobile Documents/com~apple~CloudDocs/BUSM/Alani Lab/DATA/Muzhou_RNAseq_Data_Analysis/RNAseq/plx_plxcorin_451.csv")
+rna_1205 <- read.csv("/Users/rjfisher/Library/Mobile Documents/com~apple~CloudDocs/BUSM/Alani Lab/DATA/Muzhou_RNAseq_Data_Analysis/RNAseq/plx_plxcorin_1205.csv")
+```
+
+```{r}
+rna_451$padj[rna_451$padj == "0"] <- "1.00e-306"
+rna_1205$padj[rna_1205$padj == "0"] <- "1.00e-306"
+
+rna_451$padj <- as.numeric (rna_451$padj)
+rna_1205$padj <- as.numeric (rna_1205$padj)
+
+rna_451$padj <- -log10(rna_451$padj)
+rna_1205$padj <- -log10(rna_1205$padj)
+```
+
+#FC > |2|, padj < 0.01
+```{r}
+rna_451_sig_up <- rna_451 %>% filter(FC > 2 & padj > 2)
+rna_1205_sig_up <- rna_1205 %>% filter(FC > 2 & padj > 2)
+
+rna_451_sig_down <- rna_451 %>% filter(FC < -2 & padj > 2)
+rna_1205_sig_down <- rna_1205 %>% filter(FC < -2 & padj > 2)
+```
+
+```{r}
+library(eulerr)
+library(ggVennDiagram)
+```
+
+#up genes
+```{r}
+rna_451_sig_up_gene <- rna_451_sig_up$gene
+rna_1205_sig_up_gene <- rna_1205_sig_up$gene
+
+# Create a list of sets
+sets_up_list <- list(
+  rna_451_sig_up_genes = rna_451_sig_up_gene,
+  rna_1205_sig_up_genes = rna_1205_sig_up_gene
+)
+
+ggVennDiagram(sets_up_list)
+```
+
+#down genes
+```{r}
+rna_451_sig_down_gene <- rna_451_sig_down$gene
+rna_1205_sig_down_gene <- rna_1205_sig_down$gene
+
+# Create a list of sets
+sets_down_list <- list(
+  rna_451_sig_down_genes = rna_451_sig_down_gene,
+  rna_1205_sig_down_genes = rna_1205_sig_down_gene
+)
+
+ggVennDiagram(sets_down_list)
+```
