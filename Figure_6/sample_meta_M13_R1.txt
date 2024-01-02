@@ -1,9 +1,0 @@
-ID	ANTIBODY	GROUP
-M13-R_corin_H3K27ac_R1.mappedq1.sort.rmdup.bam	H3K27ac	CORIN
-M13-R_corin_H3K4me2_R1.mappedq1.sort.rmdup.bam	H3K4me2	CORIN
-M13-R_corin_H3K9ac_R1.mappedq1.sort.rmdup.bam	H3K9ac	CORIN
-M13-R_corin_Input_R1.mappedq1.sort.rmdup.bam	INPUT	CORIN
-M13-R_DMSO_H3K27ac_R1.mappedq1.sort.rmdup.bam	H3K27ac	DMSO
-M13-R_DMSO_H3K4me2_R1.mappedq1.sort.rmdup.bam	H3K4me2	DMSO
-M13-R_DMSO_H3K9ac_R1.mappedq1.sort.rmdup.bam	H3K9ac	DMSO
-M13-R_DMSO_Input_R1.mappedq1.sort.rmdup.bam	INPUT	DMSO
