@@ -1,6 +1,3 @@
-# Wu_Corin_Manuscript
-Code and scripts used for the Wu et al manuscript  - RNAseq and ChIPseq 
-
 # The CoREST repressor complex mediates phenotype switching and therapy resistance in melanoma
 
 ### Abstract:
